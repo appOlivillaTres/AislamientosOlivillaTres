@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Cookies — Olivilla Tres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        :root {
+            --bg: #f4f2f8;
+            --surface: #fff;
+            --border: rgba(74, 59, 104, 0.12);
+            --accent: #b53987;
+            --accent2: #922f6d;
+            --purple: #4a3b68;
+            --dark: #35284f;
+            --text: #2d2040;
+            --muted: rgba(74, 59, 104, 0.55);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: var(--dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 32px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 24px;
+            font-size: 0.75rem;
+        }
+
+        .topbar a,
+        .topbar span {
+            color: rgba(201, 184, 232, 0.8);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color .2s;
+        }
+
+        .topbar a:hover {
+            color: #f386cc;
+        }
+
+        .topbar-div {
+            width: 1px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media(max-width:600px) {
+            .topbar {
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .topbar-div {
+                display: none;
+            }
+        }
+
+        /* NAVBAR */
+        .site-header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+
+        .navbar-custom {
+            background: rgba(74, 59, 104, 0.97) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 3px solid var(--accent);
+            padding: 0 24px;
+            transition: all .3s ease;
+        }
+
+        .navbar-custom.scrolled {
+            background: rgba(53, 40, 79, 0.99) !important;
+            box-shadow: 0 4px 32px rgba(74, 59, 104, .35);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .logo-empresa {
+            height: 76px;
+            width: auto;
+            transition: height .3s;
+        }
+
+        .navbar-custom.scrolled .logo-empresa {
+            height: 48px;
+        }
+
+        .logo-subtitulo {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(232, 176, 208, 0.8);
+            border-left: 1px solid var(--border);
+            padding-left: 12px;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 20px 14px !important;
+            letter-spacing: .3px;
+            transition: color .2s;
+            position: relative;
+            overflow: visible;
+        }
+
+        .navbar-custom.scrolled .nav-link {
+            padding: 14px 14px !important;
+        }
+
+        /* Rayita rosa en ::before para no chocar con Bootstrap ::after */
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 14px;
+            right: 14px;
+            height: 2px;
+            background: #f386cc;
+            transform: scaleX(0);
+            transition: transform .25s ease;
+        }
+
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            transform: scaleX(1);
+        }
+
+        /* Liberar ::after para Bootstrap */
+        .navbar-custom .nav-link::after {
+            content: none;
+        }
+
+        /* Restaurar ::after de Bootstrap solo en dropdown-toggle */
+        .navbar-custom .dropdown-toggle::after {
+            content: '' !important;
+            display: inline-block !important;
+            position: static !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin-left: 0.255em !important;
+            vertical-align: 0.255em !important;
+            border-top: 0.3em solid !important;
+            border-right: 0.3em solid transparent !important;
+            border-bottom: 0 !important;
+            border-left: 0.3em solid transparent !important;
+            background: none !important;
+            transform: none !important;
+            transition: none !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+        }
+
+        .navbar-custom .dropdown-toggle:hover::after,
+        .navbar-custom .dropdown-toggle.active::after {
+            transform: none !important;
+            background: none !important;
+        }
+
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #ffffff !important;
+        }
+
+        .navbar-custom .dropdown-menu {
+            background: #ffffff;
+            border: 1px solid rgba(74, 59, 104, 0.1);
+            border-top: 2px solid var(--accent);
+            border-radius: 0 0 12px 12px;
+            padding: 6px 0;
+            box-shadow: 0 20px 48px rgba(74, 59, 104, .18);
+            animation: fade-in .15s ease;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-custom .dropdown-item {
+            color: var(--purple);
+            font-size: 13px;
+            padding: 9px 18px;
+            transition: all .15s;
+        }
+
+        .navbar-custom .dropdown-item:hover,
+        .navbar-custom .dropdown-item.active {
+            color: var(--accent);
+            background: #f7f0f5;
+            padding-left: 24px;
+        }
+
+        .btn-cta {
+            background: var(--accent) !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            padding: 8px 18px !important;
+            border: none !important;
+            transition: background .2s, transform .1s;
+        }
+
+        .btn-cta:hover {
+            background: var(--accent2) !important;
+            transform: translateY(-1px);
+        }
+
+        .btn-cta::after {
+            display: none !important;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: var(--accent) !important;
+        }
+
+        .navbar-custom .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c0398c' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        #headerSpacer {
+            height: 130px;
+        }
+
+        @media (max-width:768px) {
+            #headerSpacer {
+                height: 170px;
+            }
+        }
+
+        .navbar-custom .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(181, 57, 135, 0.4) !important;
+        }
+
+        /* ========== FIN NAVBAR ========== */
+
+        #headerSpacer {
+            height: 130px;
+            background: var(--dark);
+        }
+
+        @media(max-width:768px) {
+            #headerSpacer {
+                height: 170px;
+                background: var(--dark);
+            }
+        }
+
+        /* HERO */
+        .page-hero {
+            background: linear-gradient(160deg, #35284f 0%, #4a3b68 55%, #5e3d7a 100%);
+            border-bottom: 4px solid var(--accent);
+            padding: 80px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 57, 135, .2) 0%, transparent 70%);
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, .05) 0%, transparent 70%);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb-custom {
+            font-size: 12px;
+            letter-spacing: .5px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 28px;
+        }
+
+        .breadcrumb-custom a {
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .breadcrumb-custom a:hover {
+            color: #f386cc;
+        }
+
+        .breadcrumb-custom span {
+            margin: 0 8px;
+            opacity: .4;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #f386cc;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(243, 134, 204, .3);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            background: linear-gradient(90deg, #f386cc, #e8b0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        /* MAIN */
+        main {
+            flex: 1;
+            padding: 64px 0 80px;
+        }
+
+        .legal-wrap {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 32px;
+            align-items: start;
+            min-width: 0;
+        }
+
+        @media(max-width:900px) {
+            .legal-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CONTENT CARD */
+        .content-card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 24px rgba(74, 59, 104, 0.08);
+            padding: 40px;
+            min-width: 0;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        /* TOC */
+        .toc-box {
+            background: var(--bg);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .toc-box h6 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: .7rem;
+        }
+
+        .toc-box ol {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .toc-box li {
+            margin-bottom: .3rem;
+        }
+
+        .toc-box a {
+            color: var(--purple);
+            text-decoration: none;
+            font-size: .875rem;
+            font-weight: 500;
+        }
+
+        .toc-box a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* SECTIONS */
+        .legal-section {
+            margin-bottom: 2.8rem;
+            scroll-margin-top: 160px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .legal-section h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .legal-section p {
+            font-size: .9rem;
+            line-height: 1.75;
+            color: #444;
+            margin-bottom: .9rem;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            padding-left: 1.4rem;
+            margin-bottom: .9rem;
+        }
+
+        .legal-section li {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: .35rem;
+        }
+
+        .legal-section strong {
+            color: var(--purple);
+        }
+
+        .legal-section a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .legal-section a:hover {
+            text-decoration: underline;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.8rem 0;
+        }
+
+        /* TABLE */
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: .85rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .cookie-table th {
+            background: var(--purple);
+            color: #fff;
+            padding: .75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: .8rem;
+        }
+
+        .cookie-table td {
+            padding: .7rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: #444;
+            vertical-align: top;
+        }
+
+        .cookie-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cookie-table tr:nth-child(even) td {
+            background: var(--bg);
+        }
+
+        .cookie-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.2rem 0;
+        }
+
+        .cookie-table {
+            margin: 0;
+            min-width: 600px;
+        }
+
+        .badge-tipo {
+            display: inline-block;
+            padding: .18rem .5rem;
+            border-radius: 20px;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .badge-tecnica {
+            background: #e8f0fe;
+            color: #2c4a9a;
+        }
+
+        .badge-analitica {
+            background: #fce8f3;
+            color: var(--accent);
+        }
+
+        .badge-terceros {
+            background: #fff3e0;
+            color: #c45000;
+        }
+
+        .info-highlight {
+            background: linear-gradient(135deg, rgba(74, 59, 104, .05), rgba(181, 57, 135, .04));
+            border: 1px solid rgba(181, 57, 135, .18);
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            margin: 1.2rem 0;
+            font-size: .875rem;
+            color: var(--purple);
+            line-height: 1.6;
+        }
+
+        .info-highlight i {
+            color: var(--accent);
+            margin-right: .4rem;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(74, 59, 104, 0.06);
+            padding: 28px;
+        }
+
+        .info-card-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: .88rem;
+            color: var(--purple);
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-row i {
+            color: var(--accent);
+            font-size: .85rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        .info-row a {
+            color: var(--purple);
+            text-decoration: none;
+            transition: color .2s;
+            font-weight: 500;
+        }
+
+        .info-row a:hover {
+            color: var(--accent);
+        }
+
+        .nav-legal {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-legal a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .875rem;
+            color: var(--purple);
+            text-decoration: none;
+            padding: .55rem .8rem;
+            border-radius: 8px;
+            transition: background .15s, color .15s;
+            font-weight: 500;
+        }
+
+        .nav-legal a:hover {
+            background: #f7f0f5;
+            color: var(--accent);
+        }
+
+        .nav-legal a.active {
+            background: #f7f0f5;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .nav-legal i {
+            color: var(--accent);
+            width: 16px;
+            font-size: .8rem;
+        }
+
+        .browser-list {
+            list-style: none;
+            padding: 0;
+            margin: .8rem 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .browser-list li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .875rem;
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 500;
+            padding: .5rem .8rem;
+            border-radius: 8px;
+            background: var(--bg);
+            transition: background .15s, color .15s;
+        }
+
+        .browser-list li a:hover {
+            background: #f7f0f5;
+            color: var(--accent);
+        }
+
+        .browser-list li a i {
+            color: var(--accent);
+            width: 16px;
+        }
+
+        /* FOOTER */
+        .footer-main {
+            background: var(--purple);
+            padding: 56px 0 0;
+        }
+
+        .footer-logo {
+            height: 68px;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-heading {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #e8b0d0;
+            margin-bottom: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: #f386cc;
+        }
+
+        .footer-contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: .85rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 12px;
+        }
+
+        .footer-contact-row i {
+            color: var(--accent);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-row a {
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-contact-row a:hover {
+            color: #f386cc;
+        }
+
+        .footer-bottom {
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+            margin-top: 48px;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .3);
+            text-align: center;
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: rgba(255, 255, 255, .4);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: #f386cc;
+        }
+
+        @media(max-width:820px) {
+            .breadcrumb-custom {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .hero-eyebrow {
+                font-size: 15px;
+            }
+
+            main {
+                padding: 40px 0 60px;
+            }
+
+            .page-hero {
+                padding: 60px 0 50px;
+            }
+
+            .content-card {
+                padding: 24px;
+            }
+        }
+
+        @media(max-width:440px) {
+            .hero-eyebrow {
+                font-size: 8px;
+            }
+
+            .content-card {
+                padding: 16px;
+            }
+        }
+
+        @media(max-width:390px) {
+            .content-card {
+                padding: 16px;
+            }
+        }
+
+        /* CHATBOT */
+        #chat-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--purple);
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(74, 59, 104, .4);
+            z-index: 9999;
+            transition: background .2s, transform .15s;
+        }
+
+        #chat-btn:hover {
+            background: var(--accent);
+            transform: scale(1.08);
+        }
+
+        #chat-panel {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            width: 360px;
+            height: 520px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 48px rgba(74, 59, 104, .2);
+            display: flex;
+            flex-direction: column;
+            z-index: 9998;
+            transform: scale(.92) translateY(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform .22s ease, opacity .22s ease;
+            border: 1px solid var(--border);
+        }
+
+        .chat-header {
+            background: var(--purple);
+            color: #fff;
+            padding: 14px 16px;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .chat-header .ch-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .chat-header .ch-status {
+            font-size: 11px;
+            opacity: .65;
+        }
+
+        .chat-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #cp-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-chips {
+            padding: 0 12px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chat-chip {
+            background: #f7f0f5;
+            color: var(--purple);
+            border: 1px solid rgba(181, 57, 135, .2);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .15s, color .15s;
+        }
+
+        .chat-chip:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .chat-input-row {
+            padding: 10px 12px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            padding: 9px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 100px;
+            outline: none;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            transition: border-color .2s;
+        }
+
+        .chat-input-row input:focus {
+            border-color: var(--accent);
+        }
+
+        .chat-input-row button {
+            background: var(--purple);
+            color: #fff;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background .2s;
+        }
+
+        .chat-input-row button:hover {
+            background: var(--accent);
+        }
+
+        /* BANNER COOKIES */
+        #cookie-banner {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(680px, calc(100vw - 2rem));
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(26, 26, 46, .18), 0 0 0 1px rgba(74, 59, 104, .08);
+            padding: 1.4rem 1.6rem;
+            z-index: 9997;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            animation: slideUp .4s ease;
+        }
+
+        #cookie-banner.hidden {
+            display: none;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .ck-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: .1rem;
+        }
+
+        .ck-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ck-body strong {
+            display: block;
+            font-size: .93rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: .35rem;
+        }
+
+        .ck-body p {
+            font-size: .82rem;
+            color: #666;
+            margin: 0 0 .9rem;
+            line-height: 1.55;
+        }
+
+        .ck-body p a {
+            color: #b53987;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .ck-actions {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .ck-btn {
+            border: none;
+            border-radius: 25px;
+            padding: .46rem 1.1rem;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+
+        .ck-accept {
+            background: #b53987;
+            color: #fff;
+        }
+
+        .ck-accept:hover {
+            background: #9a2d71;
+        }
+
+        .ck-reject {
+            background: transparent;
+            color: #555;
+            border: 1.5px solid #ddd;
+        }
+
+        .ck-reject:hover {
+            border-color: #aaa;
+            color: #333;
+        }
+
+        .ck-more {
+            background: transparent;
+            color: #b53987;
+            padding-left: .2rem;
+            padding-right: .2rem;
+            text-decoration: underline;
+            font-size: .79rem;
+        }
+
+        .ck-more:hover {
+            color: #9a2d71;
+        }
+
+        @media(max-width:480px) {
+            #cookie-banner {
+                padding: 1.1rem 1.2rem;
+                flex-direction: column;
+                gap: .8rem;
+            }
+
+            .ck-icon {
+                font-size: 1.5rem;
+            }
+
+            .ck-actions {
+                width: 100%;
+            }
+
+            .ck-btn {
+                flex: 1;
+                text-align: center;
+            }
+
+            .ck-more {
+                flex: 0 0 auto;
+            }
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        .logo-empresa {
+            height: 90px;
+            border-radius: 5px;
+        }
+
+        .footer-logo {
+            border-radius: 5px;
+        }
+
+        @media (max-width: 1920px) {
+            .navbar-custom .nav-link {
+                font-size: 17px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 20px;
+            }
+
+            .page-hero {
+                padding: 72px 0 135px;
+            }
+
+            .hero-eyebrow {
+                margin-left: 1rem;
+                font-size: 20px;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 5vw, 4.4rem);
+            }
+
+            .hero-desc {
+                font-size: 1.5rem;
+                margin-top: 30px;
+            }
+
+            main {
+                flex: 1;
+                padding: 56px 0 80px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .hero-title {
+                font-size: clamp(2rem, 3vw, 4.4rem);
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+            }
+
+            .page-hero {
+                padding: 80px 0 158px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 17px;
+            }
+
+            .hero-eyebrow {
+                margin-left: 0.5rem;
+                font-size: 20px;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 3vw, 4.4rem);
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-custom .nav-link {
+                font-size: 15px;
+            }
+
+            .page-hero {
+                margin-bottom: 0px;
+            }
+
+            main {
+                flex: 1;
+                padding: 40px 0 80px;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .page-hero {
+                padding: 20px 0 20px;
+                margin-bottom: 0px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .hero-eyebrow {
+                margin-left: 0.5rem;
+                font-size: 15px;
+            }
+
+            main {
+                flex: 1;
+                padding: 55px 0 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-eyebrow {
+                font-size: 10px;
+            }
+
+            .page-hero {
+                padding: 25px 0 25px;
+                margin-bottom: 0px;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .hero-title {
+                font-size: clamp(1rem, 5vw, 3.4rem);
+            }
+
+            .hero-desc {
+                font-size: 0.8rem;
+            }
+
+            .hero-eyebrow {
+                font-size: 8px;
+            }
+
+            .page-hero {
+                padding: 30px 0 30px;
+                margin: 0px;
+            }
+        }
+
+        @media (max-width: 394px) {
+            .hero-title {
+                font-size: clamp(1rem, 5vw, 3.4rem);
+            }
+
+            .page-hero {
+                padding: 40px 0 40px;
+            }
+
+            .hero-desc {
+                font-size: 0.8rem;
+            }
+
+            .hero-eyebrow {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FIXED HEADER -->
+    <header id="siteHeader" class="site-header-fixed">
+        <div class="topbar" id="topbar">
+            <span><i class="fa-solid fa-location-dot"></i> Calle Rio Valdecelada, 7 — Toledo</span>
+            <div class="topbar-div"></div>
+            <a href="tel:925233454"><i class="fa-solid fa-phone"></i> 925 23 34 54</a>
+            <div class="topbar-div"></div>
+            <a href="mailto:almacen@olivillatres.com"><i class="fa-solid fa-envelope"></i> almacen@olivillatres.com</a>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+            <div class="container-fluid px-3 px-lg-4">
+                <a class="navbar-brand" href="./index.html">
+                    <img src="logo.png" class="logo-empresa" alt="Olivilla Tres">
+                    <span class="logo-subtitulo">Almacén</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-stretch">
+                        <li class="nav-item"><a class="nav-link" href="./index.html"><i
+                                    class="fa-solid fa-house me-1"></i>Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i
+                                    class="fa-solid fa-trowel-bricks me-1"></i>Proveedores</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./sika.html">Sika</a></li>
+                                <li><a class="dropdown-item" href="./bostik.html">Bostik</a></li>
+                                <li><a class="dropdown-item" href="./grupopuma.html">Grupo Puma</a></li>
+                                <li><a class="dropdown-item" href="./ursa.html">Ursa</a></li>
+                                <li><a class="dropdown-item" href="./regarsa.html">Regarsa</a></li>
+                                <li><a class="dropdown-item" href="./soprema.html">Soprema</a></li>
+                                <li><a class="dropdown-item" href="./maydisa.html">Maydisa</a></li>
+                                <li><a class="dropdown-item" href="./pyl.html">PYL</a></li>
+                                <li><a class="dropdown-item" href="./suimco.html">Suimco</a></li>
+                                <li><a class="dropdown-item" href="./tripomat.html">Tripomant</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="./ferreteria.html"><i
+                                    class="fa-solid fa-screwdriver-wrench me-1"></i>Ferretería</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./poliymeta.html"><i
+                                    class="fa-solid fa-cube me-1"></i>Policarbonatos</a></li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link btn-cta" href="./formulario.html"><i
+                                    class="fa-solid fa-phone me-1"></i>Solicitar Presupuesto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="headerSpacer"></div>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container hero-inner">
+            <div class="breadcrumb-custom">
+                <a href="./index.html">Inicio</a><span>›</span>Política de Cookies
+            </div>
+            <span class="hero-eyebrow"><i class="fa-solid fa-cookie-bite"></i> Información legal</span>
+            <h1 class="hero-title">Política de <em>Cookies</em></h1>
+            <p class="hero-desc">Información sobre el uso de cookies en el portal de Almacén Olivilla Tres S.L.U. y cómo
+                gestionarlas.</p>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container">
+            <div class="legal-wrap">
+
+                <!-- CONTENIDO -->
+                <div class="content-card">
+
+                    <div class="toc-box">
+                        <h6>Contenido</h6>
+                        <ol>
+                            <li><a href="#s1">¿Qué son las cookies?</a></li>
+                            <li><a href="#s2">Cookies que utiliza este portal</a></li>
+                            <li><a href="#s3">Cookies de terceros</a></li>
+                            <li><a href="#s3b">Servicios del chatbot</a></li>
+                            <li><a href="#s4">Cómo gestionar o deshabilitar las cookies</a></li>
+                            <li><a href="#s5">Consentimiento y revocación</a></li>
+                            <li><a href="#s6">Actualización de esta política</a></li>
+                        </ol>
+                    </div>
+
+                    <!-- S1 -->
+                    <div class="legal-section" id="s1">
+                        <div class="section-label"><span class="section-num">1</span> ¿Qué son las cookies?</div>
+                        <h2>¿Qué son las cookies?</h2>
+                        <p>Las cookies son pequeños archivos de texto que los sitios web depositan en el dispositivo del
+                            usuario (ordenador, tablet, teléfono móvil) cuando este los visita. Su finalidad es recordar
+                            información sobre la visita para facilitar la navegación, personalizar el contenido o
+                            recopilar estadísticas de uso.</p>
+                        <p>Las cookies no dañan el dispositivo ni contienen código malicioso. Su uso está regulado en
+                            España por la <strong>Ley 34/2002, de Servicios de la Sociedad de la Información
+                                (LSSI)</strong>, en su artículo 22.2, y por el <strong>Reglamento General de Protección
+                                de Datos (RGPD)</strong> de la Unión Europea.</p>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- S2 -->
+                    <div class="legal-section" id="s2">
+                        <div class="section-label"><span class="section-num">2</span> Cookies que utiliza este portal
+                        </div>
+                        <h2>Cookies que utiliza este portal</h2>
+                        <p>El portal <strong>www.olivillatres.es</strong>, titularidad de <strong>Almacén Olivilla Tres
+                                S.L.U.</strong>, puede utilizar los siguientes tipos de cookies:</p>
+                        <div class="cookie-table-wrap">
+
+                            <table class="cookie-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Tipo</th>
+                                        <th>Finalidad</th>
+                                        <th>Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>olivilla_cookies</code></td>
+                                        <td><span class="badge-tipo badge-tecnica">Técnica</span></td>
+                                        <td>Guarda la preferencia del usuario sobre el banner de cookies para no
+                                            mostrarlo
+                                            de nuevo.</td>
+                                        <td>1 año</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>_ga</code></td>
+                                        <td><span class="badge-tipo badge-analitica">Analítica</span></td>
+                                        <td>Cookie de Google Analytics. Distingue usuarios únicos y genera
+                                            estadísticas de
+                                            visitas. Los datos son anonimizados.</td>
+                                        <td>2 años</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>_ga_*</code></td>
+                                        <td><span class="badge-tipo badge-analitica">Analítica</span></td>
+                                        <td>Cookie de Google Analytics 4 (GA4). Almacena el estado de sesión para
+                                            métricas
+                                            de uso del portal.</td>
+                                        <td>2 años</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="info-highlight">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Las <strong>cookies técnicas o estrictamente necesarias</strong> no requieren consentimiento
+                            previo, ya que son imprescindibles para el correcto funcionamiento del portal. El resto solo
+                            se activan si el usuario lo acepta a través del banner de cookies.
+                        </div>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- S3 -->
+                    <div class="legal-section" id="s3">
+                        <div class="section-label"><span class="section-num">3</span> Cookies de terceros</div>
+                        <h2>Cookies de terceros</h2>
+                        <p>Este portal hace uso de servicios externos que pueden instalar sus propias cookies. Olivilla
+                            Tres no controla el uso que dichos terceros hacen de sus cookies:</p>
+                        <ul>
+                            <li><strong>Google Analytics</strong> (Google LLC) — estadísticas de uso anónimas. <a
+                                    href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política
+                                    de privacidad de Google <i class="fa-solid fa-arrow-up-right-from-square"
+                                        style="font-size:.7rem"></i></a></li>
+                            <li><strong>Bootstrap CDN / jsDelivr</strong> — hojas de estilo y scripts. No instala
+                                cookies de seguimiento.</li>
+                            <li><strong>Google Fonts</strong> — tipografía Inter. Google puede registrar la IP de la
+                                solicitud. <a href="https://policies.google.com/privacy" target="_blank"
+                                    rel="noopener">Política de privacidad de Google <i
+                                        class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem"></i></a>
+                            </li>
+                            <li>
+                                <strong>Render</strong> — plataforma utilizada para alojar el servicio del
+                                chatbot. Cuando el usuario interactúa con el asistente virtual, las
+                                solicitudes se envían al servidor donde se ejecuta el chatbot para poder
+                                generar una respuesta.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="info-highlight">
+                        <i class="fa-solid fa-circle-info"></i>
+                        El uso del chatbot es completamente voluntario. Al iniciar una conversación,
+                        el usuario acepta el tratamiento de los datos necesarios para responder a su
+                        consulta conforme a la Política de Privacidad del sitio web.
+                    </div>
+
+                    <hr class="section-divider">
+                    <!-- S3B -->
+                    <div class="legal-section" id="s3b">
+                        <div class="section-label">
+                            <span class="section-num">4</span>
+                            Servicios del chatbot
+                        </div>
+
+                        <h2>Funcionamiento del chatbot</h2>
+
+                        <p>
+                            Este portal incorpora un asistente virtual (chatbot) que permite responder
+                            consultas realizadas por los usuarios.
+                        </p>
+
+                        <p>
+                            Cuando el usuario envía un mensaje mediante el chatbot, dicho mensaje se
+                            transmite de forma segura al servidor donde está alojado el servicio para
+                            poder generar una respuesta.
+                        </p>
+
+                        <p>
+                            El chatbot se encuentra alojado mediante la plataforma
+                            <strong>Render</strong>, que actúa como proveedor de alojamiento del
+                            servicio.
+                        </p>
+
+                        <p>
+                            Durante este proceso pueden tratarse datos técnicos necesarios para la
+                            comunicación, como la dirección IP, la fecha y hora de la petición o la
+                            información técnica del navegador.
+                        </p>
+
+                        <p>
+                            El chatbot no instala cookies adicionales para su funcionamiento.
+                        </p>
+
+                        <div class="info-highlight">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Se recomienda no introducir datos personales especialmente sensibles
+                            (como datos de salud, información bancaria, contraseñas o documentos
+                            identificativos) durante las conversaciones mantenidas con el chatbot.
+                        </div>
+                        <p>
+                            Si el asistente virtual utiliza servicios de inteligencia artificial de terceros
+                            para generar las respuestas, las consultas podrán ser procesadas por dichos
+                            proveedores únicamente con la finalidad de responder al usuario.
+                        </p>
+                        <h2>Uso del chatbot</h2>
+
+                        <p>
+                            Este sitio web incorpora un chatbot desarrollado por el titular del sitio con la
+                            finalidad de responder consultas de los usuarios.
+                        </p>
+
+                        <p>
+                            Cuando un usuario envía un mensaje mediante el chatbot, dicho mensaje se
+                            transmite al servidor donde se ejecuta la aplicación desarrollada en Flask,
+                            alojada en la plataforma Render, para poder generar una respuesta.
+                        </p>
+
+                        <p>
+                            Los datos tratados pueden incluir el contenido de la conversación, la dirección
+                            IP y otros datos técnicos necesarios para el funcionamiento del servicio.
+                        </p>
+
+                        <p>
+                            Los datos se utilizan exclusivamente para responder a las consultas realizadas
+                            por el usuario y garantizar el correcto funcionamiento del chatbot.
+                        </p>
+
+                        <div class="info-highlight">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Se recomienda no introducir datos personales especialmente sensibles,
+                            información bancaria, contraseñas o documentos identificativos durante las
+                            conversaciones mantenidas con el chatbot.
+                        </div>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- S4 -->
+                    <div class="legal-section" id="s4">
+                        <div class="section-label"><span class="section-num">5</span> Cómo gestionar las cookies</div>
+                        <h2>Cómo gestionar o deshabilitar las cookies</h2>
+                        <p>El usuario puede aceptar, rechazar o eliminar las cookies desde la configuración de su
+                            navegador. Tenga en cuenta que deshabilitar las cookies puede afectar al correcto
+                            funcionamiento del portal.</p>
+                        <ul class="browser-list">
+                            <li><a href="https://support.google.com/chrome/answer/95647" target="_blank"
+                                    rel="noopener"><i class="fa-brands fa-chrome"></i> Google Chrome</a></li>
+                            <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias"
+                                    target="_blank" rel="noopener"><i class="fa-brands fa-firefox-browser"></i> Mozilla
+                                    Firefox</a></li>
+                            <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09"
+                                    target="_blank" rel="noopener"><i class="fa-brands fa-edge"></i> Microsoft Edge</a>
+                            </li>
+                            <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank"
+                                    rel="noopener"><i class="fa-brands fa-safari"></i> Safari</a></li>
+                        </ul>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- S5 -->
+                    <div class="legal-section" id="s5">
+                        <div class="section-label"><span class="section-num">6</span> Consentimiento y revocación</div>
+                        <h2>Consentimiento y revocación</h2>
+                        <p>Al acceder por primera vez al portal, se muestra un banner informativo que permite aceptar o
+                            rechazar las cookies no estrictamente necesarias. Esta preferencia queda guardada durante
+                            <strong>12 meses</strong>.
+                        </p>
+                        <p>El usuario puede <strong>revocar su consentimiento en cualquier momento</strong> eliminando
+                            las cookies del navegador. Tras revocar el consentimiento, las cookies analíticas y de
+                            terceros dejarán de estar activas en la siguiente visita.</p>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <!-- S6 -->
+                    <div class="legal-section" id="s6">
+                        <div class="section-label"><span class="section-num">7</span> Actualización</div>
+                        <h2>Actualización de esta política</h2>
+                        <p>Olivilla Tres S.L.U. puede modificar esta Política de Cookies en función de cambios
+                            legislativos o de los servicios utilizados en el portal.</p>
+                        <p><strong>Última actualización:</strong> junio de 2026.</p>
+                        <p>Para cualquier consulta puede contactar con nosotros en <a
+                                href="mailto:almacen@olivillatres.com">almacen@olivillatres.com</a> o llamando al <a
+                                href="tel:925233454">925 23 34 54</a>.</p>
+                    </div>
+
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="sidebar">
+                    <div class="info-card">
+                        <div class="info-card-title">Documentos legales</div>
+                        <ul class="nav-legal">
+                            <li><a href="./avisolegal.html"><i class="fa-solid fa-file-contract"></i> Aviso Legal</a>
+                            </li>
+                            <li><a href="./politicacookies.html" class="active"><i class="fa-solid fa-cookie-bite"></i>
+                                    Política de Cookies</a></li>
+                            <li><a href="./politicaprivacidad.html"><i class="fa-solid fa-shield-halved"></i> Política
+                                    de Privacidad</a></li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Contacto</div>
+                        <div class="info-row"><i class="fa-solid fa-phone"></i>
+                            <div><a href="tel:925233454">925 23 34 54</a></div>
+                        </div>
+                        <div class="info-row"><i class="fa-solid fa-envelope"></i>
+                            <div><a href="mailto:almacen@olivillatres.com">almacen@olivillatres.com</a></div>
+                        </div>
+                        <div class="info-row"><i class="fa-solid fa-location-dot"></i>
+                            <div>Calle Rio Valdecelada, 7<br>45007 — Toledo</div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Normativa aplicable</div>
+                        <div class="info-row" style="flex-direction:column;gap:8px;">
+                            <span style="font-size:.83rem;color:#444;line-height:1.6;">Ley 34/2002 (LSSI), art. 22.2 —
+                                uso de cookies con consentimiento informado.</span>
+                            <span style="font-size:.83rem;color:#444;line-height:1.6;">Reglamento (UE) 2016/679 (RGPD) —
+                                protección de datos personales.</span>
+                            <span style="font-size:.83rem;color:#444;line-height:1.6;">Ley Orgánica 3/2018 (LOPDGDD) —
+                                adaptación nacional del RGPD.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row g-5 pb-4">
+                <div class="col-lg-4 col-md-6">
+                    <img src="logo.png" class="footer-logo" alt="Olivilla Tres">
+                    <p class="footer-desc">Suministro de materiales de construcción, aislamiento e impermeabilización en
+                        Toledo. Asesoramiento técnico especializado.</p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <p class="footer-heading">Navegación</p>
+                    <ul class="footer-links">
+                        <li><a href="./index.html">Inicio</a></li>
+                        <li><a href="./ferreteria.html">Ferretería</a></li>
+                        <li><a href="./poliymeta.html">Policarbonatos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p class="footer-heading">Proveedores</p>
+                    <ul class="footer-links">
+                        <li><a href="./sika.html">Sika</a></li>
+                        <li><a href="./bostik.html">Bostik</a></li>
+                        <li><a href="./grupopuma.html">Grupo Puma</a></li>
+                        <li><a href="./ursa.html">Ursa</a></li>
+                        <li><a href="./regarsa.html">Regarsa</a></li>
+                        <li><a href="./soprema.html">Soprema</a></li>
+                        <li><a href="./pyl.html">PYL</a></li>
+                        <li><a href="./suimco.html">Suimco</a></li>
+                        <li><a href="./tripomat.html">Tripomant</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p class="footer-heading">Contacto</p>
+                    <div class="footer-contact-row"><i class="fa-solid fa-location-dot"></i><span>Calle Rio Valdecelada,
+                            7<br>45007 — Toledo</span></div>
+                    <div class="footer-contact-row"><i class="fa-solid fa-phone"></i><a href="tel:925233454">925 23 34
+                            54</a></div>
+                    <div class="footer-contact-row"><i class="fa-solid fa-envelope"></i><a
+                            href="mailto:almacen@olivillatres.com">almacen@olivillatres.com</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 <strong>Olivilla Tres S.L.U</strong> — Todos los derechos reservados &nbsp;|&nbsp; <a
+                        href="./avisolegal.html">Aviso Legal</a> &nbsp;|&nbsp; <a
+                        href="./politicacookies.html">Cookies</a> &nbsp;|&nbsp; <a
+                        href="./politicaprivacidad.html">Privacidad</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT -->
+    <button id="chat-btn" onclick="toggleChat()">💬</button>
+    <div id="chat-panel">
+        <div class="chat-header">
+            <img src="olivibot.png" alt="OliviBot">
+            <div>
+                <div class="ch-name">OliviBot</div>
+                <div class="ch-status">Responde al instante</div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">×</button>
+        </div>
+        <div id="cp-messages"></div>
+        <div class="chat-chips">
+            <span class="chat-chip" onclick="sendChip(this)">Horario</span>
+            <span class="chat-chip" onclick="sendChip(this)">Productos</span>
+            <span class="chat-chip" onclick="sendChip(this)">Métodos de Pago</span>
+            <span class="chat-chip" onclick="sendChip(this)">Contacto</span>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="cp-input" placeholder="Escribe aquí..."
+                onkeydown="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+
+    <!-- ── COOKIES ── -->
+    <div id="cookie-banner" class="hidden" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
+        <div class="cookie-icon">🍪</div>
+        <div class="cookie-body">
+            <strong>Usamos cookies</strong>
+            <p>
+                Utilizamos cookies propias y de terceros para analizar el uso del portal y mejorar tu experiencia.
+                Puedes aceptar todas las cookies, rechazar las no esenciales o consultar más información en nuestra
+                <a href="politicacookies.html">Política de Cookies</a>.
+            </p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Aceptar todas</button>
+                <button class="cookie-btn cookie-btn-reject" id="cookie-reject">Solo esenciales</button>
+                <button class="cookie-btn cookie-btn-more" onclick="window.location.href='politicacookies.html'">Más
+                    información</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://chatbot-ahtc.onrender.com/chat';
+        let isOpen = false;
+
+        function toggleChat() {
+            isOpen = !isOpen;
+            const panel = document.getElementById('chat-panel');
+            const btn = document.getElementById('chat-btn');
+            panel.style.transform = isOpen ? 'scale(1) translateY(0)' : 'scale(.92) translateY(12px)';
+            panel.style.opacity = isOpen ? '1' : '0';
+            panel.style.pointerEvents = isOpen ? 'all' : 'none';
+            btn.textContent = isOpen ? '✕' : '💬';
+            if (isOpen && document.getElementById('cp-messages').children.length === 0) {
+                addMsg('bot', '¡Hola! ¿En qué puedo ayudarte hoy?');
+                fetch(API_URL, {
+                    method: 'POST', mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensaje: 'ping' })
+                }).catch(() => { }); // wake-up silencioso
+            }
+        }
+
+        function addMsg(tipo, texto) {
+            const cont = document.getElementById('cp-messages');
+            const div = document.createElement('div');
+            div.style.cssText = 'display:flex;max-width:88%;' + (tipo === 'user' ? 'align-self:flex-end;justify-content:flex-end;' : '');
+            const bubble = document.createElement('div');
+            bubble.style.cssText = 'padding:9px 13px;font-size:13px;line-height:1.5;border-radius:14px;font-family:Inter,sans-serif;' +
+                (tipo === 'bot' ? 'background:#f7f0f5;color:#4a3b68;border-radius:4px 14px 14px 14px;' : 'background:#4a3b68;color:white;border-radius:14px 4px 14px 14px;');
+            bubble.textContent = texto;
+            div.appendChild(bubble);
+            cont.appendChild(div);
+            cont.scrollTop = cont.scrollHeight;
+        }
+
+        async function sendMsg() {
+            const input = document.getElementById('cp-input');
+            const texto = input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            addMsg('user', texto);
+            addMsg('bot', '⏳ Conectando con el servidor, espera un momento...');
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 65000); // 65s
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensaje: texto }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeout);
+                const msgs = document.getElementById('cp-messages');
+                msgs.removeChild(msgs.lastChild); // quita el ⏳
+                const data = await res.json();
+                addMsg('bot', data.respuesta);
+            } catch (e) {
+                const msgs = document.getElementById('cp-messages');
+                if (msgs.lastChild) msgs.removeChild(msgs.lastChild);
+                addMsg('bot', 'No he podido conectar. Inténtalo de nuevo en unos segundos.');
+            }
+        }
+
+        function sendChip(el) { document.getElementById('cp-input').value = el.textContent; sendMsg(); }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            var header = document.getElementById('siteHeader');
+            var navbar = document.getElementById('mainNavbar');
+            var topbar = document.getElementById('topbar');
+            var spacer = document.getElementById('headerSpacer');
+            function resize() { spacer.style.height = header.offsetHeight + 'px'; }
+            function onScroll() {
+                if (window.scrollY > 50) { navbar.classList.add('scrolled'); topbar.style.display = 'none'; }
+                else { navbar.classList.remove('scrolled'); topbar.style.display = ''; }
+                resize();
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', resize);
+            window.addEventListener('load', resize);
+            onScroll(); requestAnimationFrame(resize);
+        })();
+    </script>
+    <script>
+        (function () {
+            var COOKIE_KEY = 'olivilla_cookies';
+            var EXPIRY_DAYS = 365;
+
+            function setCookie(name, value, days) {
+                var d = new Date();
+                d.setTime(d.getTime() + days * 864e5);
+                document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+            }
+
+            function getCookie(name) {
+                var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : null;
+            }
+
+            function hideBanner() {
+                document.getElementById('cookie-banner').classList.add('hidden');
+            }
+
+            function showBanner() {
+                document.getElementById('cookie-banner').classList.remove('hidden');
+            }
+
+            // Si ya eligió, no mostrar
+            var saved = getCookie(COOKIE_KEY);
+            if (!saved) {
+                // Pequeño delay para que no tape el navbar al cargar
+                setTimeout(showBanner, 800);
+            }
+
+            document.getElementById('cookie-accept').addEventListener('click', function () {
+                setCookie(COOKIE_KEY, 'all', EXPIRY_DAYS);
+                hideBanner();
+                // Aquí puedes activar Google Analytics u otros scripts si los cargas de forma condicional
+            });
+
+            document.getElementById('cookie-reject').addEventListener('click', function () {
+                setCookie(COOKIE_KEY, 'essential', EXPIRY_DAYS);
+                hideBanner();
+            });
+        })();
+    </script>
+</body>
+
+</html>

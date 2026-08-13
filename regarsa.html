@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regarsa — Olivilla Tres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+        :root {
+            --bg: #f4f2f8;
+            --surface: #ffffff;
+            --card: #ffffff;
+            --border: rgba(74, 59, 104, 0.12);
+            --accent: #b53987;
+            --accent2: #922f6d;
+            --purple: #4a3b68;
+            --text: #2d2040;
+            --muted: rgba(74, 59, 104, 0.55);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: #35284f;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 32px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 24px;
+            font-size: 0.75rem;
+        }
+
+        .topbar a,
+        .topbar span {
+            color: rgba(201, 184, 232, 0.8);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color .2s;
+        }
+
+        .topbar a:hover {
+            color: #f386cc;
+        }
+
+        .topbar-div {
+            width: 1px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width:600px) {
+            .topbar {
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .topbar-div {
+                display: none;
+            }
+        }
+
+        /* NAVBAR */
+        .site-header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+
+        .navbar-custom {
+            background: rgba(74, 59, 104, 0.97) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 3px solid var(--accent);
+            padding: 0 24px;
+            transition: all .3s ease;
+        }
+
+        .navbar-custom.scrolled {
+            background: rgba(53, 40, 79, 0.99) !important;
+            box-shadow: 0 4px 32px rgba(74, 59, 104, .35);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .logo-empresa {
+            height: 76px;
+            width: auto;
+            transition: height .3s;
+        }
+
+        .navbar-custom.scrolled .logo-empresa {
+            height: 48px;
+        }
+
+        .logo-subtitulo {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(232, 176, 208, 0.8);
+            border-left: 1px solid var(--border);
+            padding-left: 12px;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 20px 14px !important;
+            letter-spacing: .3px;
+            transition: color .2s;
+            position: relative;
+            overflow: visible;
+        }
+
+        .navbar-custom.scrolled .nav-link {
+            padding: 14px 14px !important;
+        }
+
+        /* Rayita rosa en ::before para no chocar con Bootstrap ::after */
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 14px;
+            right: 14px;
+            height: 2px;
+            background: #f386cc;
+            transform: scaleX(0);
+            transition: transform .25s ease;
+        }
+
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            transform: scaleX(1);
+        }
+
+        /* Liberar ::after para Bootstrap */
+        .navbar-custom .nav-link::after {
+            content: none;
+        }
+
+        /* Restaurar ::after de Bootstrap solo en dropdown-toggle */
+        .navbar-custom .dropdown-toggle::after {
+            content: '' !important;
+            display: inline-block !important;
+            position: static !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin-left: 0.255em !important;
+            vertical-align: 0.255em !important;
+            border-top: 0.3em solid !important;
+            border-right: 0.3em solid transparent !important;
+            border-bottom: 0 !important;
+            border-left: 0.3em solid transparent !important;
+            background: none !important;
+            transform: none !important;
+            transition: none !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+        }
+
+        .navbar-custom .dropdown-toggle:hover::after,
+        .navbar-custom .dropdown-toggle.active::after {
+            transform: none !important;
+            background: none !important;
+        }
+
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #ffffff !important;
+        }
+
+        .navbar-custom .dropdown-menu {
+            background: #ffffff;
+            border: 1px solid rgba(74, 59, 104, 0.1);
+            border-top: 2px solid var(--accent);
+            border-radius: 0 0 12px 12px;
+            padding: 6px 0;
+            box-shadow: 0 20px 48px rgba(74, 59, 104, .18);
+            animation: fade-in .15s ease;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-custom .dropdown-item {
+            color: var(--purple);
+            font-size: 13px;
+            padding: 9px 18px;
+            transition: all .15s;
+        }
+
+        .navbar-custom .dropdown-item:hover,
+        .navbar-custom .dropdown-item.active {
+            color: var(--accent);
+            background: #f7f0f5;
+            padding-left: 24px;
+        }
+
+        .btn-cta {
+            background: var(--accent) !important;
+            color: #fff !important;
+            border-radius: 8px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            padding: 8px 18px !important;
+            border: none !important;
+            transition: background .2s, transform .1s;
+        }
+
+        .btn-cta:hover {
+            background: var(--accent2) !important;
+            transform: translateY(-1px);
+        }
+
+        .btn-cta::after {
+            display: none !important;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border-color: var(--accent) !important;
+        }
+
+        .navbar-custom .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c0398c' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        #headerSpacer {
+            height: 130px;
+        }
+
+        @media (max-width:768px) {
+            #headerSpacer {
+                height: 170px;
+            }
+        }
+
+        .navbar-custom .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(181, 57, 135, 0.4) !important;
+        }
+
+        /* ========== FIN NAVBAR ========== */
+
+        #headerSpacer {
+            height: 130px;
+        }
+
+        @media (max-width:768px) {
+            #headerSpacer {
+                height: 170px;
+            }
+        }
+
+        .navbar-custom .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(181, 57, 135, 0.4) !important;
+        }
+
+        /* HERO */
+        .page-hero {
+            background: linear-gradient(160deg, #35284f 0%, #4a3b68 55%, #5e3d7a 100%);
+            border-bottom: 4px solid var(--accent);
+            padding: 72px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 57, 135, .2) 0%, transparent 70%);
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, .05) 0%, transparent 70%);
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb-custom {
+            font-size: 12px;
+            letter-spacing: .5px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 28px;
+        }
+
+        .breadcrumb-custom a {
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .breadcrumb-custom a:hover {
+            color: #f386cc;
+        }
+
+        .breadcrumb-custom span {
+            margin: 0 8px;
+            opacity: .4;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #f386cc;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(243, 134, 204, .3);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .hero-logo-wrap {
+            border-radius: 12px;
+            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+        }
+
+        .hero-logo-wrap img {
+            height: 60px;
+            width: auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            background: linear-gradient(90deg, #f386cc, #e8b0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-num {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: .5px;
+            margin-top: 4px;
+        }
+
+        @media (max-width:576px) {
+            .page-hero {
+                padding: 48px 0 40px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+        }
+
+        /* MAIN */
+        main {
+            flex: 1;
+            padding: 64px 0 80px;
+            background: #f4f2f8;
+        }
+
+        /* CARRUSEL */
+        .cr-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #2d1f42;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 30px;
+        }
+
+        .cr-stage {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .cr-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cr-slide.active {
+            opacity: 1;
+        }
+
+        .cr-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 24px 80px;
+        }
+
+        .cr-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(30, 15, 50, .85) 0%, rgba(30, 15, 50, .1) 45%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .cr-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 24px 16px;
+        }
+
+        .cr-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #f386cc;
+            background: rgba(181, 57, 135, .2);
+            border: 1px solid rgba(243, 134, 204, .35);
+            padding: 3px 10px;
+            border-radius: 100px;
+            margin-bottom: 8px;
+        }
+
+        .cr-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 4px;
+            line-height: 1.25;
+        }
+
+        .cr-desc {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, .6);
+            margin: 0;
+        }
+
+        .cr-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, .1);
+        }
+
+        .cr-bar {
+            height: 100%;
+            background: #b53987;
+        }
+
+        .cr-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(53, 40, 79, .8);
+            border: 1px solid rgba(181, 57, 135, .4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .2s, border-color .2s;
+        }
+
+        .cr-nav:hover {
+            background: rgba(181, 57, 135, .85);
+            border-color: rgba(181, 57, 135, .8);
+        }
+
+        .cr-nav svg {
+            width: 16px;
+            height: 16px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .cr-prev {
+            left: 12px;
+        }
+
+        .cr-next {
+            right: 12px;
+        }
+
+        .cr-counter {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .5);
+            letter-spacing: 1px;
+            z-index: 5;
+        }
+
+        .cr-thumbs {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(53, 40, 79, .6);
+            border-top: 1px solid rgba(181, 57, 135, .15);
+        }
+
+        .cr-thumb {
+            flex: 1;
+            height: 52px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color .2s, opacity .2s;
+            opacity: .45;
+            background: #2d1f42;
+        }
+
+        .cr-thumb.active {
+            border-color: #b53987;
+            opacity: 1;
+        }
+
+        .cr-thumb:hover:not(.active) {
+            opacity: .75;
+            border-color: rgba(181, 57, 135, .4);
+        }
+
+        .cr-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+
+        /* SECTION HEADERS */
+
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .section-tag {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #4a3b68;
+            border: 1px solid rgba(181, 57, 135, .3);
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f4f2f8;
+            background-color: #b53987;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(74, 59, 104, 0.12);
+        }
+
+        /* PRODUCT CARDS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .pcard {
+            background: #ffffff;
+            border: 1px solid rgba(74, 59, 104, 0.12);
+            border-radius: 14px;
+            padding: 0;
+            transition: border-color .25s, transform .25s, box-shadow .25s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(74, 59, 104, 0.06);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity .25s;
+            z-index: 2;
+        }
+
+        .pcard:hover {
+            border-color: rgba(181, 57, 135, .3);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(74, 59, 104, .14);
+        }
+
+        .pcard:hover::before {
+            opacity: 1;
+        }
+
+        .pcard-img {
+            background: #f7f0f5;
+            border-bottom: 1px solid rgba(181, 57, 135, .12);
+            height: 168px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            flex-shrink: 0;
+        }
+
+        .pcard-img img {
+            max-width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+        }
+
+        .pcard-body {
+            padding: 22px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .pcard-material {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .pcard-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #4a3b68;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .pcard-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+
+        .specs-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .spec-pill {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #4a3b68;
+            background: #f7f0f5;
+            border: 1px solid rgba(181, 57, 135, .18);
+            border-radius: 20px;
+            padding: 4px 10px;
+        }
+
+
+        /* CTA BANNER */
+        .cta-banner {
+            background: linear-gradient(135deg, #4a3b68, #6b4f8f);
+            border-radius: 18px;
+            padding: 40px 48px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(74, 59, 104, .25);
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 57, 135, .2), transparent 70%);
+        }
+
+        .cta-icon {
+            font-size: 3rem;
+            color: #f386cc;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-body h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .cta-body p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 16px;
+            max-width: 560px;
+            line-height: 1.65;
+        }
+
+        .cta-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cta-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .cta-contact-item i {
+            color: #f386cc;
+            font-size: 14px;
+        }
+
+        .cta-contact-item a {
+            color: #f386cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cta-contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width:700px) {
+            .cta-banner {
+                flex-direction: column;
+                padding: 32px 24px;
+                text-align: center;
+            }
+
+            .cta-contacts {
+                justify-content: center;
+            }
+        }
+
+        /* FOOTER */
+        .footer-main {
+            background: #4a3b68;
+            padding: 56px 0 0;
+        }
+
+        .footer-logo {
+            height: 68px;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-heading {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #e8b0d0;
+            margin-bottom: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: #f386cc;
+        }
+
+        .footer-contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 12px;
+        }
+
+        .footer-contact-row i {
+            color: #b53987;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-row a {
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-contact-row a:hover {
+            color: #f386cc;
+        }
+
+        .footer-bottom {
+            background: #35284f;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+            margin-top: 48px;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .3);
+            text-align: center;
+            margin: 0;
+        }
+
+        .footer-bottom a {
+            color: rgba(255, 255, 255, .4);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: #f386cc;
+        }
+
+        @media (max-width:1920px) {
+            .page-hero {
+                margin-bottom: 200px;
+                padding: 72px 0 100px;
+            }
+
+            .hero-desc {
+                font-size: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 5vw, 4.4rem);
+            }
+
+            .hero-eyebrow {
+                margin-left: 1rem;
+                font-size: 20px;
+            }
+
+            .stat-num {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 20px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 20px;
+            }
+
+            .hero-logo-wrap img {
+                height: 100px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-wrap {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #2d1f42;
+                font-family: 'Inter', sans-serif;
+                margin-bottom: 90px;
+            }
+
+            .navbar-custom .nav-link {
+                font-size: 17px;
+            }
+
+            .logo-empresa {
+                height: 90px;
+                border-radius: 5px;
+            }
+
+            .footer-logo {
+                border-radius: 5px;
+            }
+        }
+
+        @media (max-width:1536px) {
+            .page-hero {
+                margin-bottom: 70px;
+                padding: 50px 0 50px;
+            }
+
+            .hero-desc {
+                font-size: 1.1rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+
+            .hero-eyebrow {
+                margin-left: 1rem;
+                font-size: 18px;
+            }
+
+            .stat-num {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 17px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 18px;
+            }
+
+            .hero-logo-wrap img {
+                height: 80px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-wrap {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #2d1f42;
+                font-family: 'Inter', sans-serif;
+                margin-bottom: 90px;
+            }
+        }
+
+        @media (max-width:1440px) {
+            .page-hero {
+                margin-bottom: 70px;
+                padding: 100px 0 100px;
+            }
+
+            .hero-desc {
+                font-size: 1.1rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+
+            .hero-eyebrow {
+                margin-left: 1rem;
+                font-size: 18px;
+            }
+
+            .stat-num {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 17px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 18px;
+            }
+
+            .hero-logo-wrap img {
+                height: 80px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-wrap {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #2d1f42;
+                font-family: 'Inter', sans-serif;
+                margin-bottom: 90px;
+            }
+        }
+
+        @media (max-width:1280px) {
+            .page-hero {
+                margin-bottom: 80px;
+                padding: 80px 0 80px;
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 3vw, 4.4rem);
+            }
+
+            .hero-eyebrow {
+                margin-left: 0.5rem;
+                font-size: 20px;
+            }
+
+            .stat-num {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 17px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 17px;
+            }
+
+            .hero-logo-wrap img {
+                height: 100px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-wrap {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #2d1f42;
+                font-family: 'Inter', sans-serif;
+                margin-bottom: 90px;
+            }
+        }
+
+        @media (max-width:1024px) {
+            .page-hero {
+                margin-bottom: 83px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-wrap {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                background: #2d1f42;
+                font-family: 'Inter', sans-serif;
+                margin-bottom: 90px;
+            }
+            .navbar-custom .nav-link {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width:820px) {
+
+            .page-hero {
+                margin-bottom: 45px;
+                padding: 35px 0 35px;
+            }
+
+            .hero-eyebrow {
+                margin-left: 0.5rem;
+                font-size: 15px;
+            }
+
+            main {
+                padding-top: 0px;
+                margin-right: 15px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .hero-logo-wrap img {
+                height: 80px;
+            }
+
+            .stat-label {
+                font-size: 15px;
+            }
+
+            .stat-num {
+                font-size: 1.5rem;
+            }
+
+
+        }
+
+        @media (max-width:768px) {
+            .page-hero {
+                margin-bottom: 20px;
+                padding: 20px 0 20px;
+
+            }
+
+            main {
+                padding-top: 0px;
+                margin-right: 0px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .stat-num {
+                font-size: 1rem;
+            }
+
+            .hero-eyebrow {
+                font-size: 10px;
+            }
+
+            .hero-stats {
+                display: flex;
+                gap: 40px;
+                margin-top: 20px;
+            }
+
+            .hero-desc {
+                font-size: 0.75rem;
+            }
+
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.5rem, 3vw, 4.4rem);
+            }
+
+            .hero-logo-wrap img {
+                height: 65px;
+            }
+
+            .section-tag {
+                font-size: 17px;
+            }
+
+            .section-header {
+                margin-bottom: 15px;
+            }
+
+            .pcard-desc {
+                font-size: 0.72rem;
+            }
+
+        }
+
+        @media (max-width:768px) {
+            #headerSpacer {
+                height: 170px;
+            }
+        }
+
+        @media (max-width:700px) {
+            .cta-banner {
+                flex-direction: column;
+                padding: 32px 24px;
+                text-align: center;
+            }
+
+            .cta-contacts {
+                justify-content: center;
+            }
+
+        }
+
+        @media (max-width:576px) {
+            .page-hero {
+                padding: 80px 0 80px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            main {
+                padding-top: 100px;
+            }
+        }
+
+
+        @media (max-width:440px) {
+            .page-hero {
+                margin-bottom: 30px;
+                padding: 33px 0 33px;
+            }
+
+            .hero-desc {
+                font-size: 0.7rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1rem, 5vw, 4.4rem);
+            }
+
+            .section-tag {
+                font-size: 15px;
+            }
+
+            .section-title {
+                padding: 15px;
+            }
+
+            .pcard-name {
+                font-size: 0.8rem;
+            }
+
+            .pcard-desc {
+                font-size: 0.6rem;
+            }
+
+            .spec-pill {
+                font-size: 0.6rem;
+            }
+
+            .pcard-img {
+
+                height: 160px;
+            }
+
+            .hero-eyebrow {
+                font-size: 5px;
+                display: inline;
+            }
+
+            .stat-num {
+                font-size: 1rem;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 10px;
+            }
+
+            .hero-logo-wrap img {
+                height: 30px;
+            }
+
+            main {
+                padding-top: 0px;
+                margin-right: 0px;
+                margin-left: 10px;
+            }
+
+            .cr-stage {
+                height: 275px;
+            }
+
+            .section-title {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width:394px) {
+            .page-hero {
+                margin-bottom: 10px;
+                padding: 20px 0 20px;
+            }
+
+            .hero-desc {
+                font-size: 0.55rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1rem, 5vw, 4.4rem);
+            }
+
+            .hero-eyebrow {
+                font-size: 5px;
+                display: inline;
+            }
+
+            .stat-num {
+                font-size: 1rem;
+            }
+
+            .stat-label {
+                font-size: 8px;
+            }
+
+            .section-title {
+                font-size: 0.7rem;
+            }
+
+            .section-tag {
+                font-size: 12px;
+            }
+
+            .breadcrumb-custom {
+                font-size: 10px;
+            }
+
+            .hero-logo-wrap img {
+                height: 30px;
+            }
+
+            main {
+                padding-top: 0px;
+            }
+
+            .cr-stage {
+                height: 230px;
+            }
+
+            .pcard-material {
+                font-size: 7px;
+            }
+
+            .pcard-name {
+                font-size: 0.7rem;
+            }
+
+            .pcard-desc {
+                font-size: 0.5rem;
+            }
+
+            .spec-pill {
+                font-size: 0.5rem;
+            }
+
+            .pcard-img {
+                height: 125px;
+            }
+
+            .pcard-img img {
+                max-height: 110px;
+            }
+
+            .section-header {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* ── CHATBOT ── */
+        #chat-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--purple);
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(74, 59, 104, .4);
+            z-index: 9999;
+            transition: background .2s, transform .15s;
+        }
+
+        #chat-btn:hover {
+            background: var(--accent);
+            transform: scale(1.08);
+        }
+
+        #chat-panel {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            width: 360px;
+            height: 520px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 48px rgba(74, 59, 104, .2);
+            display: flex;
+            flex-direction: column;
+            z-index: 9998;
+            transform: scale(.92) translateY(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform .22s ease, opacity .22s ease;
+            border: 1px solid var(--border);
+        }
+
+        .chat-header {
+            background: var(--purple);
+            color: #fff;
+            padding: 14px 16px;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .chat-header .ch-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .chat-header .ch-status {
+            font-size: 11px;
+            opacity: .65;
+        }
+
+        .chat-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #cp-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-chips {
+            padding: 0 12px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chat-chip {
+            background: #f7f0f5;
+            color: var(--purple);
+            border: 1px solid rgba(181, 57, 135, .2);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .15s, color .15s;
+        }
+
+        .chat-chip:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .chat-input-row {
+            padding: 10px 12px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            padding: 9px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 100px;
+            outline: none;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            transition: border-color .2s;
+        }
+
+        .chat-input-row input:focus {
+            border-color: var(--accent);
+        }
+
+        .chat-input-row button {
+            background: var(--purple);
+            color: #fff;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background .2s;
+        }
+
+        .chat-input-row button:hover {
+            background: var(--accent);
+        }
+
+        /* ── BANNER COOKIES ── */
+        #cookie-banner {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(680px, calc(100vw - 2rem));
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(26, 26, 46, .18), 0 0 0 1px rgba(74, 59, 104, .08);
+            padding: 1.4rem 1.6rem;
+            z-index: 9999;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            animation: slideUp .4s ease;
+        }
+
+        #cookie-banner.hidden {
+            display: none;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .cookie-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: .1rem;
+        }
+
+        .cookie-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cookie-body strong {
+            display: block;
+            font-size: .95rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: .35rem;
+        }
+
+        .cookie-body p {
+            font-size: .83rem;
+            color: #666;
+            margin: 0 0 .9rem;
+            line-height: 1.55;
+        }
+
+        .cookie-body p a {
+            color: #b53987;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .cookie-btn {
+            border: none;
+            border-radius: 25px;
+            padding: .48rem 1.15rem;
+            font-size: .83rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+
+        .cookie-btn-accept {
+            background: #b53987;
+            color: #fff;
+        }
+
+        .cookie-btn-accept:hover {
+            background: #9a2d71;
+        }
+
+        .cookie-btn-reject {
+            background: transparent;
+            color: #555;
+            border: 1.5px solid #ddd;
+        }
+
+        .cookie-btn-reject:hover {
+            border-color: #aaa;
+            color: #333;
+        }
+
+        .cookie-btn-more {
+            background: transparent;
+            color: #b53987;
+            padding-left: .2rem;
+            padding-right: .2rem;
+            text-decoration: underline;
+            font-size: .8rem;
+        }
+
+        .cookie-btn-more:hover {
+            color: #9a2d71;
+        }
+
+        @media (max-width: 480px) {
+            #cookie-banner {
+                padding: 1.1rem 1.2rem;
+                flex-direction: column;
+                gap: .8rem;
+            }
+
+            .cookie-icon {
+                font-size: 1.5rem;
+            }
+
+            .cookie-actions {
+                width: 100%;
+            }
+
+            .cookie-btn {
+                flex: 1;
+                text-align: center;
+            }
+
+            .cookie-btn-more {
+                flex: 0 0 auto;
+            }
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FIXED HEADER -->
+    <header id="siteHeader" class="site-header-fixed">
+        <div class="topbar" id="topbar">
+            <span><i class="fa-solid fa-location-dot"></i> Calle Rio Valdecelada, 7 — Toledo</span>
+            <div class="topbar-div"></div>
+            <a href="tel:925233454"><i class="fa-solid fa-phone"></i> 925 23 34 54</a>
+            <div class="topbar-div"></div>
+            <a href="mailto:almacen@olivillatres.com"><i class="fa-solid fa-envelope"></i> almacen@olivillatres.com</a>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+            <div class="container-fluid px-3 px-lg-4">
+                <a class="navbar-brand" href="./index.html">
+                    <img src="logo.png" class="logo-empresa" alt="Olivilla Tres">
+                    <span class="logo-subtitulo">Almacén</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-stretch">
+                        <li class="nav-item"><a class="nav-link" href="./index.html"><i
+                                    class="fa-solid fa-house me-1"></i>Inicio</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown"><i
+                                    class="fa-solid fa-trowel-bricks me-1"></i>Proveedores</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./sika.html">Sika</a></li>
+                                <li><a class="dropdown-item" href="./bostik.html">Bostik</a></li>
+                                <li><a class="dropdown-item" href="./grupopuma.html">Grupo Puma</a></li>
+                                <li><a class="dropdown-item" href="./ursa.html">Ursa</a></li>
+                                <li><a class="dropdown-item active" href="./regarsa.html">Regarsa</a></li>
+                                <li><a class="dropdown-item" href="./soprema.html">Soprema</a></li>
+                                <li><a class="dropdown-item" href="./maydisa.html">Maydisa</a></li>
+                                <li><a class="dropdown-item" href="./pyl.html">PYL</a></li>
+                                <li><a class="dropdown-item" href="./suimco.html">Suimco</a></li>
+                                <li><a class="dropdown-item" href="./tripomat.html">Tripomant</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="./ferreteria.html"><i
+                                    class="fa-solid fa-screwdriver-wrench me-1"></i>Ferretería</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./poliymeta.html"><i
+                                    class="fa-solid fa-cube me-1"></i>Policarbonatos</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="./maquinaria.html"><i
+                                    class="fa-solid fa-truck-monster me-1"></i>Alquiler Maquinaria</a></li> -->
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link btn-cta" href="./formulario.html"><i
+                                    class="fa-solid fa-phone me-1"></i>Solicitar Presupuesto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="headerSpacer"></div>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container hero-inner">
+            <div class="breadcrumb-custom">
+                <a href="./index.html">Inicio</a><span>›</span>
+                <a href="./#proveedores">Proveedores</a><span>›</span>
+                Regarsa
+            </div>
+            <div class="hero-logo-wrap">
+                <img src="https://regarsa.com/wp-content/uploads/2024/07/regarsa-global-white-1024x329.png"
+                    alt="Regarsa Logo" class="hero-logo">
+            </div>
+            <span class="hero-eyebrow"><i class="fa-solid fa-spray-can-sparkles"></i> Perfilería y Mallas</span>
+            <h1 class="hero-title">Perfilería, Mallas<br>&amp; Resinas de <em>Poliester</em></h1>
+            <p class="hero-desc">Gama completa de Regarsa para construcción y bricolaje: perfilería, mallas, resinas de
+                poliester y más.</p>
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-num">14</div>
+                    <div class="stat-label">Familias de producto</div>
+                </div>
+                <div>
+                    <div class="stat-num">20+</div>
+                    <div class="stat-label">Referencias en catálogo</div>
+                </div>
+                <div>
+                    <div class="stat-num">Toledo</div>
+                    <div class="stat-label">Entrega en nuestro local</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container">
+
+            <!-- CARRUSEL -->
+            <div class="cr-wrap">
+                <div class="cr-progress">
+                    <div class="cr-bar" id="crBar"></div>
+                </div>
+                <div class="cr-stage">
+                    <div class="cr-slide active" data-tag="Refuerzo de Pavimentos" data-title="Tramaglass SGR 120"
+                        data-desc="Malla de fibra de vidrio.">
+                        <img src="https://regarsa.com/wp-content/uploads/2025/02/45_01.jpg" alt="Tramaglass SGR 120">
+                    </div>
+                    <div class="cr-slide" data-tag="Impermeabilización" data-title="Regarmesh Premium Pintura"
+                        data-desc="Malla de fibra de vidrio.">
+                        <img src="https://regarsa.com/media/2100/imagen_300050.jpg" alt="Regarmesh Premium Pintura">
+                    </div>
+                    <div class="cr-slide" data-tag="MAT Fibra de Vidrio" data-title="Euro-MAT 100 50m²"
+                        data-desc="Hilos cortados de 50 mm de fibra de vidrio que se mantienen cohesionados gracias a un emulsionante.">
+                        <img src="https://regarsa.com/media/2200/imagen_200430.jpg" alt="Euro-MAT 100 50m²">
+                    </div>
+                    <div class="cr-slide" data-tag="Berenjenos" data-title="Berenjeno 20 mm"
+                        data-desc="Berenjeno de PVC.">
+                        <img src="https://regarsa.com/media/2130/imagen_R2333250.jpg" alt="Berenjeno 20 mm">
+                    </div>
+                    <div class="cr-overlay"></div>
+                    <div class="cr-info">
+                        <div class="cr-tag" id="crTag"></div>
+                        <div class="cr-title" id="crTitle"></div>
+                        <div class="cr-desc" id="crDesc"></div>
+                    </div>
+                    <div class="cr-counter" id="crCounter"></div>
+                    <button class="cr-nav cr-prev" id="crPrev" aria-label="Anterior">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <button class="cr-nav cr-next" id="crNext" aria-label="Siguiente">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="9 6 15 12 9 18" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="cr-thumbs" id="crThumbs"></div>
+            </div>
+
+            <!-- 01 Impermeabilización -->
+            <div class="section-header">
+                <span class="section-tag">01</span>
+                <h2 class="section-title">Impermeabilización</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2100/imagen_300050.jpg" alt="Regarmesh Premium Pintura">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Impermeabilización</div>
+                        <h3 class="pcard-name">Regarmesh Premium Pintura</h3>
+                        <p class="pcard-desc">Malla de fibra de vidrio. Indicada para el refuerzo de impermeabilización
+                            de cubiertas y terrazas. Evitando la aparición de fisuras y grietas.</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- 02 Mortero/Revoco -->
+            <div class="section-header">
+                <span class="section-tag">02</span>
+                <h2 class="section-title">Mortero/Revoco</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2100/imagen_300450.jpg" alt="Regarmesh Premium Azul">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Mortero/Revoco</div>
+                        <h3 class="pcard-name">Regarmesh Premium Azul</h3>
+                        <p class="pcard-desc">Malla de fibra de vidrio. Indicada para el refuerzo de todos los tipos de
+                            mortero/revoco. Trabajos de construcción de carga y renovación general. Previenen la
+                            formación de grietas y fisuras.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 03 Yesos/Microcementos -->
+            <div class="section-header">
+                <span class="section-tag">03</span>
+                <h2 class="section-title">Yesos/Microcementos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2100/imagen_300250.jpg" alt="Regarmesh Premium yesos">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yesos/Microcementos
+                        </div>
+                        <h3 class="pcard-name">Regarmesh Premium yesos</h3>
+                        <p class="pcard-desc">Malla de fibra de vidrio. Indicada para el refuerzo de superficies de
+                            nueva construcción o en reformas de todos los tipos de yesos en interior. Previenen la
+                            formación de grietas y fisuras, también en acabados con microcementos. Óptimo refuerzo para
+                            su uso en trancadís y gresite.</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 04 Refuerzo de Pavimentos -->
+            <div class="section-header">
+                <span class="section-tag">04</span>
+                <h2 class="section-title">Refuerzo de Pavimentos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/wp-content/uploads/2025/02/45_01.jpg" alt="Tramaglass SGR120">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Refuerzo de Pavimentos
+                        </div>
+                        <h3 class="pcard-name">Tramaglass SGR 120</h3>
+                        <p class="pcard-desc">Malla de fibra de vidrio desarrollada como solución para el refuerzo de
+                            pavimentos de interior, en sustitución del mallazo, con el fin de reducir las grietas que se
+                            pueden producir durante las fases de fraguado y secado del mortero.</p>
+                    </div>
+                </div>
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2100/imagen_300529.jpg" alt="Tramaglass SGR 96">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Refuerzo de Pavimentos
+                        </div>
+                        <h3 class="pcard-name">Tramaglass SGR 96</h3>
+                        <p class="pcard-desc">Malla de fibra de vidrio. Desarrollada como una nueva solución para
+                            reforzar los pavimentos con el fin de reducir las grietas que se pueden producir durante las
+                            fases de fraguado y secado del mortero. Evita grietas en la solera: elimina hasta un 60 % de
+                            las grietas de secado. Perfecto para soleras autonivelantes o tradicionales con partículas
+                            de tamaño fino.</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 05 Yeso y Monocapa -->
+            <div class="section-header">
+                <span class="section-tag">05</span>
+                <h2 class="section-title">Yeso y Monocapa</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R21305250.jpg" alt="Perfil yeso PVC ‑ 2,5 m">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yeso y Monocapa
+                        </div>
+                        <h3 class="pcard-name">Perfil yeso PVC ‑ 2,5 m</h3>
+                        <p class="pcard-desc">Cantonera o guardavivos de PVC. Resistente a la intemperie y a los
+                            álcalis, con gran durabilidad y agujeros laterales. Garantiza la fijación al soporte para el
+                            remate de yesos y morteros permitiendo un perfecto acabado en la esquina. Las perforaciones
+                            permiten que el material fluya fácilmente y se adhiera al sustrato para obtener una esquina
+                            duradera.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R21305260.jpg" alt="Perfil yeso PVC ‑ 2,6 m">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yeso y Monocapa
+                        </div>
+                        <h3 class="pcard-name">Perfil yeso PVC ‑ 2,6 m</h3>
+                        <p class="pcard-desc">Cantonera o guardavivos de PVC. Resistente a la intemperie y a los
+                            álcalis, con gran durabilidad y agujeros laterales. Garantiza la fijación al soporte para el
+                            remate de yesos y morteros permitiendo un perfecto acabado en la esquina. Las perforaciones
+                            permiten que el material fluya fácilmente y se adhiera al sustrato para obtener una esquina
+                            duradera.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R21309470.jpg"
+                            alt="Perfil punta fina ‑ tabique">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yeso y Monocapa
+                        </div>
+                        <h3 class="pcard-name">Perfil punta fina ‑ tabique</h3>
+                        <p class="pcard-desc">Cantonera punta fina de PVC. Es un perfil especial “oculto” para uso en
+                            exteriores, en enlucidos externos y también para aplicaciones de yeso en interior.
+                            Proporciona esquinas rectas, resistentes al óxido y a los impactos fuertes. Las
+                            perforaciones permiten que el material fluya fácilmente y se adhiera al sustrato para
+                            obtener una esquina duradera.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R21305001.jpg" alt="Perfil monocapa PVC">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yeso y Monocapa
+                        </div>
+                        <h3 class="pcard-name">Perfil monocapa PVC</h3>
+                        <p class="pcard-desc">Cantonera o guardavivos de PVC. Es un perfil para uso en exteriores, en
+                            enlucidos externos y también para aplicaciones de yeso en interior. Proporciona esquinas
+                            rectas, resistentes al óxido y a los impactos fuertes. Las perforaciones permiten que el
+                            material fluya fácilmente y se adhiera al sustrato para obtener una esquina duradera.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/Esquinero%20Pvc.png"
+                            alt="Esquinero PVC p/ placa de yeso‑ 2,5 m">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Yeso y Monocapa
+                        </div>
+                        <h3 class="pcard-name">Esquinero PVC p/ placa de yeso‑ 2,5 m</h3>
+                        <p class="pcard-desc">Cantonera o guardavivos de PVC. Esquinero para aplicaciones de yeso de
+                            capa fina y paneles de yeso que proporciona un acabado de alta calidad y protección en las
+                            esquinas de los paneles de yeso. La punta rígida y afilada proporciona esquinas más
+                            puntiagudas para un aspecto moderno. Las perforaciones permiten que el material fluya
+                            fácilmente y se adhiera al sustrato para obtener una esquina duradera.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 06 Guardavivos -->
+            <div class="section-header">
+                <span class="section-tag">06</span>
+                <h2 class="section-title">Guardavivos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R21308805.jpg"
+                            alt="Perfil guardavivo galvanizado">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Guardavivos
+                        </div>
+                        <h3 class="pcard-name">Perfil guardavivo galvanizado</h3>
+                        <p class="pcard-desc">Cantonera de acero galvanizado + PVC (blanco). Proporciona esquinas de
+                            enlucido exteriores limpias, rectas y uniformes. Alas perforadas para una adhesión superior
+                            del enlucido y prevención de grietas. Reborde de PVC para dar resistencia al desgaste y la
+                            corrosión, también para proteger los
+                            bordes.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 07 Junquillos -->
+            <div class="section-header">
+                <span class="section-tag">07</span>
+                <h2 class="section-title">Junquillos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R08021.jpg" alt="Junquillo monocapa PVC">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Junquillos
+                        </div>
+                        <h3 class="pcard-name">Junquillo monocapa PVC</h3>
+                        <p class="pcard-desc">Junquillo de PVC de color blanco. Con forma trapezoidal, flexible y
+                            resistente para mortero monocapa y de fachada. Indicado para formar juntas y diseños.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 08 Berenjenos -->
+            <div class="section-header">
+                <span class="section-tag">08</span>
+                <h2 class="section-title">Berenjenos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R00939.jpg" alt="Berenjeno 15 mm.">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Berenjenos
+                        </div>
+                        <h3 class="pcard-name">Berenjeno 15 mm.</h3>
+                        <p class="pcard-desc">Berenjeno de PVC. Se utiliza para la fabricación de filos de hormigón en
+                            muros y pilares. Se coloca en encofrados para la realización de biseles en esquinas y juntas
+                            del hormigón.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R2333250.jpg" alt="Berenjeno 20 mm.">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Berenjenos
+                        </div>
+                        <h3 class="pcard-name">Berenjeno 20 mm.</h3>
+                        <p class="pcard-desc">Berenjeno de PVC. Se utiliza para la fabricación de filos de hormigón en
+                            muros y pilares. Se coloca en encofrados para la realización de biseles en esquinas y juntas
+                            del hormigón.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R2331250.jpg" alt="Berenjeno 25 mm.">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Berenjenos
+                        </div>
+                        <h3 class="pcard-name">Berenjeno 25 mm.</h3>
+                        <p class="pcard-desc">Berenjeno de PVC. Se utiliza para la fabricación de filos de hormigón en
+                            muros y pilares. Se coloca en encofrados para la realización de biseles en esquinas y juntas
+                            del hormigón.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2130/imagen_R2334250.jpg" alt="Berenjeno 30 mm.">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Berenjenos
+                        </div>
+                        <h3 class="pcard-name">Berenjeno 30 mm.</h3>
+                        <p class="pcard-desc">Berenjeno de PVC. Se utiliza para la fabricación de filos de hormigón en
+                            muros y pilares. Se coloca en encofrados para la realización de biseles en esquinas y juntas
+                            del hormigón.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 09 Polipropileno-->
+            <div class="section-header">
+                <span class="section-tag">09</span>
+                <h2 class="section-title">Polipropileno</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2140/imagen_200650.jpg" alt="Regar‑fibra 500">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Polipropileno
+                        </div>
+                        <h3 class="pcard-name">Regar‑fibra 500</h3>
+                        <p class="pcard-desc">Fibras de refuerzo fabricada en multifilamento de polipropileno. Indicado
+                            para ser adicionada a morteros y hormigones. Reducción de las microfisuras por retracción
+                            durante el fraguado, evitando la formación de fisuras mayores.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 10 Cantoneras-->
+            <div class="section-header">
+                <span class="section-tag">10</span>
+                <h2 class="section-title">Cantoneras</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2190/imagen_Cantonera%20PVC.jpg"
+                            alt="Cantonera PVC malla 8x12">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Cantoneras
+                        </div>
+                        <h3 class="pcard-name">Cantonera PVC malla 8x12</h3>
+                        <p class="pcard-desc">Cantonera fabricada en PVC con malla de fibra de vidrio álcali-resistente
+                            y certificada EAD.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11 Perfiles PVC con Malla-->
+            <div class="section-header">
+                <span class="section-tag">11</span>
+                <h2 class="section-title">Perfiles PVC con Malla</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2190/imagen_579-000-009.jpg"
+                            alt="Perfil goterón oculto PVC">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Perfiles PVC con Malla
+                        </div>
+                        <h3 class="pcard-name">Perfil goterón oculto PVC</h3>
+                        <p class="pcard-desc">Perfil con goterón oculto de PVC con malla de fibra de vidrio
+                            álcali-resistente y certificada EAD.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2190/imagen_579-000-010.jpg" alt="Perfil goterón PVC 4 mm.">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Perfiles PVC con Malla
+                        </div>
+                        <h3 class="pcard-name">Perfil goterón PVC 4 mm.</h3>
+                        <p class="pcard-desc">Perfil con goterón visto de 4 mm de PVC con malla de fibra de vidrio
+                            álcali-resistente y certificada EAD.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12 Fijaciones-->
+            <div class="section-header">
+                <span class="section-tag">12</span>
+                <h2 class="section-title">Fijaciones</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2190/imagen-LTX-800x800.png" alt="Caja Taco Fijación LTX">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Fijaciones
+                        </div>
+                        <h3 class="pcard-name">Caja Taco Fijación LTX</h3>
+                        <p class="pcard-desc">VARIAS MEDIDAS. Taco de fijación mecánica por golpeo con clavo de
+                            poliamida reforzada con fibra de vidrio.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2190/imagen-FIXPLUG10-800x800.png"
+                            alt="Taco fijación golpeo Fixplug">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Fijaciones
+                        </div>
+                        <h3 class="pcard-name">Taco fijación golpeo Fixplug</h3>
+                        <p class="pcard-desc">VARIAS MEDIDAS. Taco de fijación por golpeo con clavo poliamida reforzada
+                            con fibra de vidrio y arandela de soporte de diseño telescópico.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13 Resinas de Poliester-->
+            <div class="section-header">
+                <span class="section-tag">13</span>
+                <h2 class="section-title">Resinas de Poliester</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_KIT_POL.jpg" alt="Kit poliéster">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Resinas de Poliester
+                        </div>
+                        <h3 class="pcard-name">Kit poliéster</h3>
+                        <p class="pcard-desc">Kit: Resina de poliéster, peróxido MEK, MAT y complementos.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_453010-DIST.jpg"
+                            alt="Resina Poliéster Regarsa 1 Kg + MEK">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Resinas de Poliester
+                        </div>
+                        <h3 class="pcard-name">Resina Poliéster Regarsa 1 Kg + MEK</h3>
+                        <p class="pcard-desc">Resina de poliéster + MEK. Resina de Poliéster ortoftálica, acelerada y
+                            tixotrópica con indicador de catálisis.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_453010-DIST.jpg"
+                            alt="Resina Poliéster Regarsa 5 Kg + MEK">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Resinas de Poliester
+                        </div>
+                        <h3 class="pcard-name">Resina Poliéster Regarsa 5 Kg + MEK</h3>
+                        <p class="pcard-desc">Resina de poliéster + MEK. Resina de Poliéster ortoftálica, acelerada y
+                            tixotrópica con indicador de catálisis.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_PER.MEK.20ML.jpg" alt="Peróxido MEK (20 ml.)">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Resinas de Poliester
+                        </div>
+                        <h3 class="pcard-name">Peróxido MEK (20 ml.)</h3>
+                        <p class="pcard-desc">Peróxido MEK. Peróxido orgánico de reactividad medio, catalizador para
+                            resinas de poliéster, gel-coats, top-coats y masillas de poliéster.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14 MAT Fibra de Vidrio -->
+            <div class="section-header">
+                <span class="section-tag">14</span>
+                <h2 class="section-title">MAT Fibra de Vidrio</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_200430.jpg" alt="Euro-MAT 100 50m²">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">MAT Fibra de Vidrio
+                        </div>
+                        <h3 class="pcard-name">Euro-MAT 100 50m²</h3>
+                        <p class="pcard-desc">MAT de fibra de vidrio. Hilos cortados de 50 mm de fibra de vidrio que se
+                            mantienen cohesionados gracias a un emulsionante.</p>
+                    </div>
+                </div>
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2200/imagen_200470.jpg" alt="Euro-MAT 225 50m²">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">MAT Fibra de Vidrio
+                        </div>
+                        <h3 class="pcard-name">Euro-MAT 225 50m²</h3>
+                        <p class="pcard-desc">MAT de fibra de vidrio. Hilos cortados de 50 mm de fibra de vidrio que se
+                            mantienen cohesionados gracias a un emulsionante.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15 Cinta · Tabiquería Seca -->
+            <div class="section-header">
+                <span class="section-tag">15</span>
+                <h2 class="section-title">Cinta · Tabiquería Seca</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="products-grid">
+
+                <div class="pcard">
+                    <div class="pcard-img">
+                        <img src="https://regarsa.com/media/2120/imagen_600630.jpg" alt="Cinta Veloglas 5 cm x 25 m">
+                    </div>
+                    <div class="pcard-body">
+                        <div class="pcard-material">Cinta · Tabiquería Seca
+                        </div>
+                        <h3 class="pcard-name">Cinta Veloglas 5 cm x 25 m</h3>
+                        <p class="pcard-desc">Cinta de velo de fibra de vidrio. Indicada para las juntas y acabados en
+                            sistemas de cartón-yeso, al igual que para la reparación de grietas.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-banner">
+                <div class="cta-icon"><i class="fa-solid fa-boxes-stacking"></i></div>
+                <div class="cta-body">
+                    <h3>¿No encuentras lo que necesitas?</h3>
+                    <p>Los productos mostrados aquí, son una selección habitual en tienda, si requieres algún otro producto
+                        específico, contáctanos y te ayudamos a encontrarlo directamente con Regarsa.</p>
+                    <div class="cta-contacts">
+                        <div class="cta-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:925233454">925
+                                23 34
+                                54</a></div>
+                        <div class="cta-contact-item"><i class="fa-solid fa-envelope"></i><a
+                                href="mailto:almacen@olivillatres.com">almacen@olivillatres.com</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row g-5 pb-4">
+                <div class="col-lg-4 col-md-6">
+                    <img src="logo.png" class="footer-logo" alt="Olivilla Tres">
+                    <p class="footer-desc">Suministro de materiales de construcción, aislamiento e impermeabilización en
+                        Toledo. Asesoramiento técnico especializado.</p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <p class="footer-heading">Navegación</p>
+                    <ul class="footer-links">
+                        <li><a href="./index.html">Inicio</a></li>
+                        <li><a href="./ferreteria.html">Ferretería</a></li>
+                        <li><a href="./poliymeta.html">Policarbonatos</a></li>
+                        <!-- <li><a href="./maquinaria.html">Maquinaria</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p class="footer-heading">Proveedores</p>
+                    <ul class="footer-links">
+                        <li><a href="./sika.html">Sika</a></li>
+                        <li><a href="./bostik.html">Bostik</a></li>
+                        <li><a href="./grupopuma.html">Grupo Puma</a></li>
+                        <li><a href="./ursa.html">Ursa</a></li>
+                        <li><a href="./regarsa.html">Regarsa</a></li>
+                        <li><a href="./soprema.html">Soprema</a></li>
+                        <li><a href="./pyl.html">PYL</a></li>
+                        <li><a href="./suimco.html">Suimco</a></li>
+                        <li><a href="./tripomat.html">Tripomant</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p class="footer-heading">Contacto</p>
+                    <div class="footer-contact-row"><i class="fa-solid fa-location-dot"></i><span>Calle Rio Valdecelada,
+                            7<br>45007 — Toledo</span></div>
+                    <div class="footer-contact-row"><i class="fa-solid fa-phone"></i><a href="tel:925233454">925 23 34
+                            54</a></div>
+                    <div class="footer-contact-row"><i class="fa-solid fa-envelope"></i><a
+                            href="mailto:almacen@olivillatres.com">almacen@olivillatres.com</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 <strong>Olivilla Tres S.L.U</strong> — Todos los derechos reservados &nbsp;|&nbsp; <a
+                        href="./avisolegal.html">Aviso Legal</a> &nbsp;|&nbsp; <a
+                        href="./politicacookies.html">Cookies</a> &nbsp;|&nbsp; <a
+                        href="./politicaprivacidad.html">Privacidad</a></p>
+            </div>
+        </div>
+    </footer>
+    <!-- ── CHATBOT ── -->
+    <button id="chat-btn" onclick="toggleChat()">💬</button>
+    <div id="chat-panel">
+        <div class="chat-header">
+            <img src="olivibot.png" alt="OliviBot">
+            <div>
+                <div class="ch-name">OliviBot</div>
+                <div class="ch-status">Responde al instante</div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()">×</button>
+        </div>
+        <div id="cp-messages"></div>
+        <div class="chat-chips">
+            <span class="chat-chip" onclick="sendChip(this)">Horario</span>
+            <span class="chat-chip" onclick="sendChip(this)">Productos</span>
+            <span class="chat-chip" onclick="sendChip(this)">Métodos de Pago</span>
+            <span class="chat-chip" onclick="sendChip(this)">Contacto</span>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="cp-input" placeholder="Escribe aquí..."
+                onkeydown="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+    <!-- ── COOKIES ── -->
+    <div id="cookie-banner" class="hidden" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
+        <div class="cookie-icon">🍪</div>
+        <div class="cookie-body">
+            <strong>Usamos cookies</strong>
+            <p>
+                Utilizamos cookies propias y de terceros para analizar el uso del portal y mejorar tu experiencia.
+                Puedes aceptar todas las cookies, rechazar las no esenciales o consultar más información en nuestra
+                <a href="politicacookies.html">Política de Cookies</a>.
+            </p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Aceptar todas</button>
+                <button class="cookie-btn cookie-btn-reject" id="cookie-reject">Solo esenciales</button>
+                <button class="cookie-btn cookie-btn-more" onclick="window.location.href='politicacookies.html'">Más
+                    información</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const API_URL = 'https://chatbot-ahtc.onrender.com/chat';
+        let isOpen = false;
+
+        function toggleChat() {
+            isOpen = !isOpen;
+            const panel = document.getElementById('chat-panel');
+            const btn = document.getElementById('chat-btn');
+            panel.style.transform = isOpen ? 'scale(1) translateY(0)' : 'scale(.92) translateY(12px)';
+            panel.style.opacity = isOpen ? '1' : '0';
+            panel.style.pointerEvents = isOpen ? 'all' : 'none';
+            btn.textContent = isOpen ? '✕' : '💬';
+            if (isOpen && document.getElementById('cp-messages').children.length === 0) {
+                addMsg('bot', '¡Hola! ¿En qué puedo ayudarte hoy?');
+                fetch(API_URL, {
+                    method: 'POST', mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensaje: 'ping' })
+                }).catch(() => { }); // wake-up silencioso
+            }
+        }
+
+        function addMsg(tipo, texto) {
+            const cont = document.getElementById('cp-messages');
+            const div = document.createElement('div');
+            div.style.cssText = 'display:flex;max-width:88%;' + (tipo === 'user' ? 'align-self:flex-end;justify-content:flex-end;' : '');
+            const bubble = document.createElement('div');
+            bubble.style.cssText = 'padding:9px 13px;font-size:13px;line-height:1.5;border-radius:14px;font-family:Inter,sans-serif;' +
+                (tipo === 'bot' ? 'background:#f7f0f5;color:#4a3b68;border-radius:4px 14px 14px 14px;' : 'background:#4a3b68;color:white;border-radius:14px 4px 14px 14px;');
+            bubble.textContent = texto;
+            div.appendChild(bubble);
+            cont.appendChild(div);
+            cont.scrollTop = cont.scrollHeight;
+        }
+
+        async function sendMsg() {
+            const input = document.getElementById('cp-input');
+            const texto = input.value.trim();
+            if (!texto) return;
+            input.value = '';
+            addMsg('user', texto);
+            addMsg('bot', '⏳ Conectando con el servidor, espera un momento...');
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 65000); // 65s
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensaje: texto }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeout);
+                const msgs = document.getElementById('cp-messages');
+                msgs.removeChild(msgs.lastChild); // quita el ⏳
+                const data = await res.json();
+                addMsg('bot', data.respuesta);
+            } catch (e) {
+                const msgs = document.getElementById('cp-messages');
+                if (msgs.lastChild) msgs.removeChild(msgs.lastChild);
+                addMsg('bot', 'No he podido conectar. Inténtalo de nuevo en unos segundos.');
+            }
+        }
+        function sendChip(el) { document.getElementById('cp-input').value = el.textContent; sendMsg(); }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            var header = document.getElementById('siteHeader');
+            var navbar = document.getElementById('mainNavbar');
+            var topbar = document.getElementById('topbar');
+            var spacer = document.getElementById('headerSpacer');
+            function resize() { spacer.style.height = header.offsetHeight + 'px'; }
+            function onScroll() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    topbar.style.display = 'none';
+                } else {
+                    navbar.classList.remove('scrolled');
+                    topbar.style.display = '';
+                }
+                resize();
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', resize);
+            window.addEventListener('load', resize);
+            onScroll();
+            requestAnimationFrame(resize);
+        })();
+    </script>
+    <script>
+        (function () {
+            const slides = document.querySelectorAll('.cr-slide');
+            const thumbsWrap = document.getElementById('crThumbs');
+            const bar = document.getElementById('crBar');
+            const tag = document.getElementById('crTag');
+            const title = document.getElementById('crTitle');
+            const desc = document.getElementById('crDesc');
+            const counter = document.getElementById('crCounter');
+            const total = slides.length;
+            let cur = 0, barStart = null, barDur = 3500;
+
+            slides.forEach((s, i) => {
+                const img = s.querySelector('img');
+                const th = document.createElement('div');
+                th.className = 'cr-thumb' + (i === 0 ? ' active' : '');
+                th.innerHTML = `<img src="${img.src}" alt="">`;
+                th.addEventListener('click', () => go(i));
+                thumbsWrap.appendChild(th);
+            });
+
+            function updateInfo(i) {
+                const s = slides[i];
+                tag.textContent = s.dataset.tag;
+                title.textContent = s.dataset.title;
+                desc.textContent = s.dataset.desc;
+                counter.textContent = (i + 1) + ' / ' + total;
+            }
+
+            function go(idx) {
+                slides[cur].classList.remove('active');
+                document.querySelectorAll('.cr-thumb')[cur].classList.remove('active');
+                cur = (idx + total) % total;
+                slides[cur].classList.add('active');
+                document.querySelectorAll('.cr-thumb')[cur].classList.add('active');
+                updateInfo(cur);
+                resetBar();
+            }
+
+            function resetBar() {
+                bar.style.transition = 'none';
+                bar.style.width = '0%';
+                barStart = null;
+                requestAnimationFrame(() => requestAnimationFrame(animBar));
+            }
+
+            function animBar(ts) {
+                if (!barStart) barStart = ts;
+                const elapsed = ts - barStart;
+                const pct = Math.min(elapsed / barDur * 100, 100);
+                bar.style.width = pct + '%';
+                if (pct < 100) {
+                    requestAnimationFrame(animBar);
+                } else {
+                    go(cur + 1);
+                }
+            }
+
+            document.getElementById('crPrev').addEventListener('click', () => go(cur - 1));
+            document.getElementById('crNext').addEventListener('click', () => go(cur + 1));
+
+            updateInfo(0);
+            requestAnimationFrame(animBar);
+        })();
+    </script>
+    <script>
+        (function () {
+            var COOKIE_KEY = 'olivilla_cookies';
+            var EXPIRY_DAYS = 365;
+
+            function setCookie(name, value, days) {
+                var d = new Date();
+                d.setTime(d.getTime() + days * 864e5);
+                document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+            }
+
+            function getCookie(name) {
+                var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : null;
+            }
+
+            function hideBanner() {
+                document.getElementById('cookie-banner').classList.add('hidden');
+            }
+
+            function showBanner() {
+                document.getElementById('cookie-banner').classList.remove('hidden');
+            }
+
+            // Si ya eligió, no mostrar
+            var saved = getCookie(COOKIE_KEY);
+            if (!saved) {
+                // Pequeño delay para que no tape el navbar al cargar
+                setTimeout(showBanner, 800);
+            }
+
+            document.getElementById('cookie-accept').addEventListener('click', function () {
+                setCookie(COOKIE_KEY, 'all', EXPIRY_DAYS);
+                hideBanner();
+                // Aquí puedes activar Google Analytics u otros scripts si los cargas de forma condicional
+            });
+
+            document.getElementById('cookie-reject').addEventListener('click', function () {
+                setCookie(COOKIE_KEY, 'essential', EXPIRY_DAYS);
+                hideBanner();
+            });
+        })();
+    </script>
+</body>
+
+</html>
