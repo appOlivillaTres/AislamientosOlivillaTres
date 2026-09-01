@@ -1014,6 +1014,10 @@
             color: rgba(255, 255, 255, 0.8);
             padding: 50px 0 0;
         }
+        .footer-logo {
+            height: 68px;
+            margin-bottom: 16px;
+        }
 
         .footer-brand p {
             font-size: 0.88rem;
@@ -1075,6 +1079,32 @@
 
         .footer-contact-item a:hover {
             color: #f386cc;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background .2s, color .2s, transform .2s;
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         .footer-bottom {
@@ -2170,10 +2200,15 @@
     <footer class="footer-main">
         <div class="container">
             <div class="row g-4 pb-4">
-                <div class="col-lg-4 col-md-6 footer-brand">
-                    <img src="logo.png" alt="Olivilla Tres" style="height:80px; margin-bottom:10px;">
-                    <p>Suministro de materiales de construcción, aislamiento e impermeabilización en Toledo.
-                        Asesoramiento técnico especializado.</p>
+                <div class="col-lg-4 col-md-6">
+                    <img src="logo.png" class="footer-logo" alt="Olivilla Tres">
+                    <p class="footer-desc">Suministro de materiales de construcción, aislamiento e impermeabilización en
+                        Toledo. Asesoramiento técnico especializado.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/aislamientosolivillatres/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/p/Aislamientos-Olivilla-Tres-100066456881439/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@aislamientosolivillatres" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <p class="footer-heading">Navegación</p>
